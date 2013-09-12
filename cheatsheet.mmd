@@ -1,39 +1,84 @@
 |                              `:help motion.txt`                                ||
-| --------------------- | ------------------------------------------------------- |
-| `<Left>`, `h`, `<BS>` | Move cursor left                                        |
-| `<Down>`, `j`         | Move cursor down one line                               |
-| `gj`                  | Move cursor down one screen line                        |
-| `<Up>`, `k`           | Move cursor up one line                                 |
-| `gk`                  | Move cursor up one screen line                          |
-| `<Right>`, `l`        | Move cursor right                                       |
-| `gg`                  |                                                         |
-| `G`                   |                                                         |
-| `0`                   | Move cursor to the beginning of the line                |
-| `^`                   | Move cursor to the first character of the line          |
-| `<Home>`              |                                                         |
-| `<End>`, `$`          |                                                         |
-| `w`, `W`              |                                                         |
-| `e`, `E`              |                                                         |
-| `b`, `B`              |                                                         |
-| `ge`, `gE`            |                                                         |
-| `tx`, `Tx`            |                                                         |
-| `fx`, `Fx`            |                                                         |
-| `;`                   |                                                         |
-| `,`                   |                                                         |
+| -------------------- | -------------------------------------------------------- |
+| `<Left>`, `h`        | Move left                                                |
+| `<C-H>`, `<BS>`      | Move left                                                |
+| `<Down>`, `j`        | Move down one line                                       |
+| `<C-J>`, `<NL>`      | Move down one line                                       |
+| `gj`, `g<Down>`      | Move down one screen line                                |
+| `+`, `<C-M>`, `<CR>` | Move down on the first character                         |
+| `_`                  | Move down *count*-1 lines on the first character         |
+| `<Up>`, `k`, `<C-P>` | Move up one line                                         |
+| `gk`, `g<Up>`        | Move up one screen line                                  |
+| `-`                  | Move up on the first character                           |
+| `<Right>`, `l`       | Move right                                               |
+| `<Space>`            | Move right                                               |
+| `<C-Home>`, `gg`     | Go to line *count* or the first line on the first character |
+| `G`                  | Go to line *count* or the last line on the first character  |
+| `<C-End>`            | Go to line *count* or the last line on the last character   |
+| `0`                  | Move to the beginning of the line                        |
+| `<Home>`             | Move to the beginning of the line                        |
+| `g0`, `g<Home>`      | Move to the beginning of the screen line                 |
+| `^`                  | Move to the first character of the line                  |
+| `g^`                 | Move to the first character of the screen line           |
+| `<End>`, `$`         | Move the end of the line                                 |
+| `g$`, `g<End>`       | Move the the last character of the screen line           |
+| `g_`                 | Move to the last non-blank character of the line         |
+| `H`                  | Move to the top line of the screen                       |
+| `M`                  | Move to the center line of the screen                    |
+| `L`                  | Move to the bottom line of the screen                    |
+| `gm`                 | Move to the center of the screen line                    |
+| <tt>&#124;</tt>      | Move to screen column *count*                            |
+| *count*`%`           | Move to the line at *count* percentage of the file       |
+| `:go` *n*, *n*`go`   | Move to *n* bytes in the buffer                          |
+| `(`                  | Move back a sentence                                     |
+| `)`                  | Move forward a sentence                                  |
+| `{`                  | Move back a paragraph                                    |
+| `}`                  | Move forward a paragraph                                 |
+| `%`                  | Jump to matching character                               |
+| `w`, `<S-Right>`     | Move forward a word                                      |
+| `W`, `<C-Right>`     | Move forward a WORD                                      |
+| `e`                  | Move forward to the end of word                          |
+| `E`                  | Move forward to the end of WORD                          |
+| `b`, `<S-Left>`      | Move back a word                                         |
+| `B`, `<C-Left>`      | Move back a WORD                                         |
+| `ge`                 | Move back to the end of word                             |
+| `gE`                 | Move back to the end of WORD                             |
+| `t`*x*               | Move right to one character left of the next *x*         |
+| `f`*x*               | Move right to the next *x*                               |
+| `T`*x*               | Move left to one character right of the next *x*         |
+| `F`*x*               | Move left to the next *x*                                |
+| `;`                  | Repeat last t, f, T, or F                                |
+| `,`                  | Repeat last t, f, T, or F in the opposite direction      |
+
 
 
 |                               `:help inserting`                                ||
-| ------------ | ---------------------------------------------------------------- |
-| `i`          |                                                                  |
-| `gi`         |                                                                  |
-| `I`          |                                                                  |
-| `gI`         |                                                                  |
-| `a`          |                                                                  |
-| `A`          |                                                                  |
-| `o`          |                                                                  |
-| `O`          |                                                                  |
-| `R`          |                                                                  |
-| `gR`         |                                                                  |
+| --------------- | ------------------------------------------------------------- |
+| `i`             | Insert text before the cursor                                 |
+| `:startinsert`  | Insert text before the cursor                                 |
+| `gi`            | Insert text at the last insertion point                       |
+| `I`             | Insert text before the first non-blank character in the line  |
+| `gI`            | Insert text at the beginning of the line                      |
+| `a`             | Append text after the cursor                                  |
+| `A`             | Append text at the end of the line                            |
+| `:startinsert!` | Append text at the end of the line                            |
+| `o`             | Begin a new line below the cursor and insert text             |
+| `O`             | Begin a new line above the cursor and insert text             |
+
+
+
+|                                `:help Replace`                                 ||
+| --------------- | ------------------------------------------------------------- |
+| `R`             | Enter Replace mode                                            |
+| `:startreplace` | Enter Replace mode                                            |
+
+
+
+|                             `:help vreplace-mode`                              ||
+| ---------------- | ------------------------------------------------------------ |
+| `gR`             | Enter Virtual Replace mode                                   |
+| `:startgreplace` | Enter Virtual Replace mode                                   |
+
 
 
 |                            `:help ins-special-keys`                             ||
@@ -79,6 +124,7 @@
 | `<C-X><C-Y>`     | Stop completion with current selection                        |
 
 
+
 |                                  visual modes                                  ||
 | ------------ | ---------------------------------------------------------------- |
 | `v`          | Enter visual (character) mode                                    |
@@ -86,22 +132,65 @@
 | `<C-V>`      | Enter visual block mode                                          |
 
 
+
 |                               `:help change.txt`                               ||
 | ------------ | ---------------------------------------------------------------- |
 | `<Del>`, `x` |                                                                  |
 | `X`          |                                                                  |
-| `d<motion>`  |                                                                  |
+| `d`          |                                                                  |
 | `dd`         |                                                                  |
 | `D`          |                                                                  |
 | `:delete`    |                                                                  |
 | `J`          |                                                                  |
 | `gJ`         |                                                                  |
 | `:join`      |                                                                  |
+| `c`          | Change (delete and enter insert mode)                            |
+| `d`          | Delete                                                           |
+| `y`          | Yank (copy)                                                      |
+| `~`          | Swap case                                                        |
+| `g~`         | Swap case                                                        |
+| `gu`         | Make lowercase                                                   |
+| `gU`         | Make uppercase                                                   |
+| `!`          | Filter through an external program                               |
+| `=`          | Indent                                                           |
+| `==`         | Indent lines                                                     |
+| `g?`         | Encode with rot13                                                |
+| `>`          | Indent right                                                     |
+| `>>`         | Indent line right                                                |
+| `<`          | Indent left                                                      |
+| `<<`         | Indent line left                                                 |
+| `!`          | Filter text through a command                                    |
+| `!!`         | Filter lines through a command                                   |
+| `:`*range*`!`*command* | Filter *range* through *command*                       |
+| `:s`         | Substitute (see `:help :s`)                                      |
+| `:&`, `&`    | Repeat last substitution                                         |
 
 
-|                                  text objects                                  ||
+
+|                              `:help text-objects`                              ||
 | ------------ | ---------------------------------------------------------------- |
-|              |                                                                  |
+| `a`*c*       | Text object *c* including delimiters                             |
+| `i`*c*       | Text object *c* inside delimiters                                |
+| `aw`         | Word                                                             |
+| `aw`         | WORD                                                             |
+| `as`         | Sentence                                                         |
+| `ap`         | Paragraph                                                        |
+| `a'`         | `'`-quoted string                                                |
+| `a"`         | `"`-quoted string                                                |
+| `a[`, `a]`   | [] block                                                         |
+| `a(`, `a)`   | () block                                                         |
+| `a<`, `a>`   | &lt;&gt; block                                                   |
+| `a{`, `a}`   | {} block                                                         |
+| `at`         | Tag (HTML, XML, etc.)                                            |
+
+
+
+|                             `:help inserting-file`                             ||
+| -------------------- | -------------------------------------------------------- |
+| `:r` *file*          | Insert *file* below the current line                     |
+| `:`*range*`r` *file* | Insert *file* below the last line in *range*             |
+| `:r !` *command*     | Insert the output of *command* below the current line    |
+
 
 
 |                                window commands                                 ||
@@ -120,6 +209,7 @@
 | `<C-W>l`            |                                                           |
 
 
+
 |                                    display                                     ||
 | ------------ | ---------------------------------------------------------------- |
 | `<C-G>`      | Show filename and position in status line                        |
@@ -134,29 +224,71 @@
 | `zo`         |                                                                  |
 
 
-|                               changing behavior                                ||
-|                          Unset with `:set no`/option/                          ||
+
+|                              `:help options.txt`                               ||
 | --------------------- | ------------------------------------------------------- |
-| `:set nocompatible`   |                                                         |
+| `:set`                | Print non-default options                               |
+| `:set all`            | Print all options                                       |
+| `:set` *option*`?`    | Print the value of *option*                             |
+| `:set no`*option*     | Turn *option* off                                       |
+| `:set inv`*option*, `:set` *option*`!` | Toggle *option*                        |
+| `:set` *option*`&`    | Reset *option* to its default value                     |
+| `:set` *option*`&vi`  | Reset *option* to its `vi` default value                |
+| `:set` *option*`&vim` | Reset *option* to its Vim default value                 |
+| `:set all&`           | Reset all options to their default values               |
+| `:set` *option*`=`*value*, `:set` *option*`:`*value* | Set *option* to *value*  |
+| `:set` *option*`+=`*value* | Add numeric *value* or append string *value* to *option* |
+| `:set` *option*`^=`*value* | Multiply numeric *value* or prepend string *value* to *option* |
+| `:set` *option*`+=`*value* | Subtract numeric *value* or remove string *value* from *option* |
+| `:setlocal`           | Print or set values local to the current buffer or window |
+| `:setglobal`          | Print or set global values without modifying local values |
+| `:setlocal` *option*`<` | Set the local value of *option* to its global value   |
+| `:set` *option*`<`    | Remove the local value of *option*                      |
+| `:options`, `:browse set` | Open a window to view and set all options           |
+|                                Boolean options                                 ||
+| `:set compatible`     | Turn on strict `vi` compatibility                       |
 | `:set incsearch`      | Look ahead on searches                                  |
 | `:set ignorecase`     | Ignore case in searches                                 |
-| `:set smartcase`      |                                                         |
-| `:set hlsearch`       |                                                         |
-| `:set cursorline`     |                                                         |
-| `:set cursorcolumn`   |                                                         |
-| `:set number`         |                                                         |
-| `:set relativenumber` |                                                         |
-| `:set wrap`           |                                                         |
-| `:set expandtab`      |                                                         |
-| `:set autoindent`     |                                                         |
-| `:set smarttab`       |                                                         |
-| `:set spell`          |                                                         |
+| `:set smartcase`      | Override `ignorecase` when searches contain upper case  |
+| `:set hlsearch`       | Highlight any matches to the previous search pattern    |
+| `:set cursorline`     | Highlight the screen line where the cursor is           |
+| `:set cursorcolumn`   | Highlight the screen column where the cursor is         |
+| `:set number`         | Show line numbers in front of each line                 |
+| `:set relativenumber` | Show line numbers relative to the current line          |
+| `:set wrap`           | Show long lines wrapped on the screen                   |
+| `:set expandtab`      | Insert spaces instead of tab characters                 |
+| `:set autoindent`     | Match indent of previous line when starting a new line  |
+| `:set smartindent`    | Try to guess what you want when autoindenting           |
+| `:set cindent`        | Use C rules when autoindenting                          |
+| `:set shiftround`     | Round indentation to multiples of `shiftwidth`          |
+| `:set smarttab`       | Change the rules when hitting `<Tab>` or `<BS>`         |
+| `:set spell`          | Turn on spell checking                                  |
+| `:set hidden`         | Allows switching away from modified buffers             |
+| `:set cursorbind`     | Cursors in all windows with this set move together      |
+| `:set scrollbind`     | All windows with this set scroll together               |
+| `:set paste`          | Disables any automatic formatting                       |
+| `:set list`           | Show line endings and special characters                |
+| `:set showmatch`      | Jump to the matching bracket when inserting one         |
+| `:set ruler`          | Show the line and column number in the status line      |
+| `:set showcmd`        | Show partial commands in the status line                |
+| `:set showmode`       | Show a message in the status line for some modes        |
 |                                Assign a number                                 ||
-| `:set colorcolumn=`/n/  |                                                       |
-| `:set textwidth=`/n/    |                                                       |
-| `:set wrapmargin=`/n/   |                                                       |
-| `:set shiftwidth=`/n/   |                                                       |
-| `:set spelllang=`/lang/ |                                                       |
+| `:set textwidth=`*n*    | Wrap text at *n* columns                              |
+| `:set wrapmargin=`*n*   | Wrap text at *n* columns from the right of the screen |
+| `:set shiftwidth=`*n*   | Use *n* spaces for indentation                        |
+| `:set tabstop=`*n*      | Set tabs to *n* spaces                                |
+| `:set scrolloff=`*n*    | Show *n* screen lines above and below the cursor      |
+|                             Various other settings                             ||
+| `:set spelllang=`*lang* | Set spell checking language to *lang*                 |
+| `:set fileformat=`*f*   | Set file format to *f* (`unix`, `dos`, or `mac`)      |
+| `:set colorcolumn=`*list* | Highlight the columns in *list*                     |
+| `:set filetype=`*t*   | Set filetype to *t* and trigger associated autocommands |
+| `:set formatoptions=`*list* | Set format options to *list* (see `:help fo-table`) |
+| `:set mouse=`*list*   | Enable mouse and set options to *list* (see `:help mouse`) |
+| `:set matchpairs=`*list* | Set characters to match with `showmatch`, `%`, etc. to *list* |
+| `:set statusline=`*string* | Set the status line to *string* (see `:help status-line`) |
+| `:set virtualedit=`*list* | Allow the cursor to be positioned past the end of text (see `:help virtualedit`) |
+
 
 
 |                               `:help registers`                                ||
@@ -177,6 +309,49 @@
 | `"~`         | Dropped text                                                     |
 | `"_`         | Black hole register                                              |
 | `"=`         | Expression register                                              |
+| `:reg`, `:registers`, `:dis`, `:display` | Print registers                      |
+
+
+
+|                              `:help mark-motions`                                 ||
+| --------------- | ---------------------------------------------------------------- |
+| `m`*c*          | Set mark *c*                                                     |
+| `:mark` *c*     | Set mark *c*                                                     |
+| `:k`*c*         | Set mark *c*                                                     |
+| `'`*c*          | Jump to mark *c* ([a-z] in current buffer, [A-Z] in any buffer)  |
+| <tt>\`</tt>*c*  | Jump to mark *c* ([a-z] in current buffer, [A-Z] in any buffer)  |
+| `:marks`        | List marks                                                       |
+| `:delmarks` *c* | Delete mark(s) *c*                                               |
+| `:delmarks!`    | Delete all marks                                                 |
+| `'[`            | Beginning of last changed or yanked text                         |
+| `']`            | End of last changed or yanked text                               |
+| `'<`            | Beginning of last visual area                                    |
+| `'>`            | End of last visual area                                          |
+| `''`            | Last jump or mark position                                       |
+| `'"`            | Last position when exiting the current buffer                    |
+| `'^`            | Position where insert mode was last stopped                      |
+| `'.`            | Position of the last change                                      |
+| `'(`            | Start of the current sentence                                    |
+| `')`            | End of the current sentence                                      |
+| `'{`            | Start of the current paragraph                                   |
+| `'}`            | End of the current paragraph                                     |
+
+
+
+|                              `:help jump-motions`                              ||
+| ---------------- | ------------------------------------------------------------ |
+| `:jumps`         | Print the jump list                                          |
+| `<C-O>`          | Move to older position in jump list                          |
+| `<C-I>`, `<Tab>` | Move to older position in jump list                          |
+
+
+
+|                               `:help changelist`                               ||
+| ------------ | ---------------------------------------------------------------- |
+| `:changes`   | Print the change list                                            |
+| `g;`         | Move to older position in change list                            |
+| `g,`         | Move to newer position in jump list                              |
+
 
 
 |                               `:help formatting`                               ||
@@ -190,6 +365,7 @@
 | `gwgw`, `gww`     | Format the current line and restore cursor position         |
 
 
+
 |                                buffer commands                                 ||
 | ------------ | ---------------------------------------------------------------- |
 | `:ls`        |                                                                  |
@@ -198,6 +374,7 @@
 | `:bn`        |                                                                  |
 | `:bp`        |                                                                  |
 | `:bufdo`     |                                                                  |
+
 
 
 |                                    exiting                                     ||
@@ -213,9 +390,9 @@
 | `:qa`        |                                                                  |
 
 
+
 |                                     random                                     ||
 | ----------------- | ----------------------------------------------------------- |
-| `:s`              |                                                             |
 | `:g`              |                                                             |
 | `:v`              |                                                             |
 | `:echo`           |                                                             |
@@ -223,23 +400,86 @@
 | `:args`           |                                                             |
 | `:argdo`          |                                                             |
 | `:tabnew`         |                                                             |
-| `:reg`, `:registers`, `:dis`, `:display` |                                      |
 | `q:`, `:<C-F>`    |                                                             |
 | `q/`              |                                                             |
 | `q?`              |                                                             |
 | `:e`              |                                                             |
-| `:!`              |                                                             |
 | `:shell`          |                                                             |
 | `gf`              |                                                             |
 | `gF`              |                                                             |
 
 
-|                              `:help patterns.txt`                              ||
+
+|                              `:help pattern.txt`                               ||
 | ------------ | ---------------------------------------------------------------- |
-|              |                                                                  |
+| `.`          | Any character (other than a newline)                             |
+| `\.`         | Any character (across lines)                                     |
+| <tt>&#92;</tt><tt>&#124;</tt> | Or                                              |
+| `\&`         | And (matches from the beginning of the line)                     |
+|                                    Grouping                                    ||
+| `\(`*pattern*`\)` | Grouping for capture or repetition                          |
+| `\%(`*pattern*`\)` | Grouping without capture                                   |
+|                                    Anchors                                     ||
+| `^`          | Beginning of the line                                            |
+| `$`          | End of the line                                                  |
+| `\<`         | Left word boundary                                               |
+| `\>`         | Right word boundary                                              |
+| `\_^`        | Start of line (in a multi-line match)                            |
+| `\_$`        | End of line (in a multi-line match)                              |
+| `\%^`        | Start of the file                                                |
+| `\%$`        | End of the file                                                  |
+|                                   Repetition                                   ||
+| `*`          | 0 or more                                                        |
+| `\{-\}`      | 0 or more, non-greedy                                            |
+| `\?`         | 0 or 1                                                           |
+| `\+`         | 1 or more                                                        |
+| `\{`*n*`\}`  | Exactly *n*                                                      |
+| `\{,`*m*`\}` | No more than *m*                                                 |
+| `\{`*n*`,`*m*`\}` | At least *n*, but no more than *m*                          |
+| `\{-`*n*`,`*m*`\}` | At least *n*, but no more than *m*, non-greedy             |
+|                               Character classes                                ||
+| `[abc]`      | Any of the characters `a`, `b`, or `c`                           |
+| `[a-c]`      | Any of the characters `a` through `c`                            |
+| `[^abc]`     | Any character **not** `a`, `b`, or `c`                           |
+| `[[:alnum:]]` | Any alphanumeric character                                      |
+| `[[:alpha:]]` | Any alphabetical character                                      |
+| `[[:upper:]]` | Any upper case character                                        |
+| `[[:lower:]]` | Any lower case character                                        |
+| `[[:digit:]]` | Any digit [0-9]                                                 |
+| `[[:blank:]]` | Any horizontal whitespace character                             |
+| `[[:space:]]` | Any whitespace character                                        |
+| `[[:cntrl:]]` | Any control character                                           |
+| `[[:punct:]]` | Any punctuation character                                       |
+| `[[:print:]]` | Any printable character                                         |
+| `[[:graph:]]` | Any non-space printable character                               |
+|                                 Backreferences                                 ||
+| <tt>&#92;</tt>*n* | Previous grouped match *n*                                  |
+| `&`          | Entire left-hand side match                                      |
+|                             Zero-width assertions                              ||
+| `\@=`        | Zero-width positive look-ahead                                   |
+| `\@!`        | Zero-width negative look-ahead                                   |
+| `\@<=`       | Zero-width positive look-behind                                  |
+| `\@<!`       | Zero-width negative look-behind                                  |
+| `\zs`        | Start of match (the rest is zero-width)                          |
+| `\ze`        | End of match (the rest is zero-width)                            |
+
 
 
 |                                 `:help :help`                                  ||
-| ------------ | ---------------------------------------------------------------- |
-| `:help`      |                                                                  |
-| `:helpgrep`  |                                                                  |
+| --------------------- | ------------------------------------------------------- |
+| `:help`               | Open help                                               |
+| `<C-]>`, `<C-LeftMouse>`, `g<LeftMouse>` | Jump to a tag                        |
+| `<C-T>`, `<C-D>`      | Jump back to previous help tag                          |
+| `:help` *subject*     | Open help and jump to *subject*                         |
+| `:helpgrep` *pattern* | Search help for *pattern* and jump to first match       |
+| `:cnext`              | Jump to the next match                                  |
+| `:cwindow`            | Show matches in the quickfix window                     |
+
+
+
+|                              Command-line options                              ||
+| ------------------- | --------------------------------------------------------- |
+| `vim` *files*       | Open terminal Vim to edit *files*                         |
+| `gvim`, `vim -g`    | Open GUI Vim                                              |
+| `vimdiff`, `vim -d` | Open Vim in diff mode                                     |
+| `vim -`             | Edit stdin                                                |
