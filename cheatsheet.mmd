@@ -1,3 +1,5 @@
+
+
 |                              `:help motion.txt`                                ||
 | -------------------- | -------------------------------------------------------- |
 | `<Left>`, `h`        | Move left                                                |
@@ -27,7 +29,7 @@
 | `M`                  | Move to the center line of the screen                    |
 | `L`                  | Move to the bottom line of the screen                    |
 | `gm`                 | Move to the center of the screen line                    |
-| <tt>&#124;</tt>      | Move to screen column *count*                            |
+| <code>&#124;</code>  | Move to screen column *count*                            |
 | *count*`%`           | Move to the line at *count* percentage of the file       |
 | `:go` *n*, *n*`go`   | Move to *n* bytes in the buffer                          |
 | `(`                  | Move back a sentence                                     |
@@ -125,45 +127,71 @@
 
 
 
-|                                  visual modes                                  ||
+|                               `:help visual.txt`                               ||
 | ------------ | ---------------------------------------------------------------- |
 | `v`          | Enter visual (character) mode                                    |
 | `V`          | Enter visual line mode                                           |
 | `<C-V>`      | Enter visual block mode                                          |
+| `gv`         | Start visual mode with the previous area and mode                |
+| `gn`         | Search forward for the last search pattern and select it         |
+| `gN`         | Search backwards for the last search pattern and select it       |
+| `o`          | Move the cursor to the opposite end of the selection             |
+| `O`          | Move the cursor to the opposite end of the selection line        |
 
 
 
 |                               `:help change.txt`                               ||
 | ------------ | ---------------------------------------------------------------- |
-| `<Del>`, `x` |                                                                  |
-| `X`          |                                                                  |
-| `d`          |                                                                  |
-| `dd`         |                                                                  |
-| `D`          |                                                                  |
-| `:delete`    |                                                                  |
-| `J`          |                                                                  |
-| `gJ`         |                                                                  |
-| `:join`      |                                                                  |
+| `<Del>`, `x` | Delete characters under and after the cursor                     |
+| `X`          | Delete characters before the cursor                              |
+| `d`          | Delete text                                                      |
+| `dd`         | Delete lines                                                     |
+| `D`, `d$`    | Delete to the end of the line                                    |
+| `:delete`    | Delete current line (or lines specified with a range)            |
 | `c`          | Change (delete and enter insert mode)                            |
-| `d`          | Delete                                                           |
+| `s`          | Change (substitute) characters                                   |
+| `cc`, `S`    | Change the current line                                          |
+| `C`, `c$`    | Change to the end of the line                                    |
+| `r`          | Replace characters                                               |
+| `gr`         | Replace characters (like Virtual Replace)                        |
+| `J`          | Join lines                                                       |
+| `gJ`         | Join lines without inserting or removing spaces                  |
+| `:join`      | Join lines without inserting or removing spaces                  |
 | `y`          | Yank (copy)                                                      |
+| `yy`         | Yank (copy) a line                                               |
+| `Y`, `y$`    | Yank (copy) to the end of the line                               |
+| `:yank`      | Yank (copy) a line                                               |
+| `p`          | Put (paste) text after the cursor                                |
+| `gp`         | Put (paste) text after the cursor and leave the cursor after it  |
+| `P`          | Put (paste) text before the cursor                               |
+| `gP`         | Put (paste) text before the cursor and leave the cursor after it |
+| `:put`       | Put (paste) text after the current line                          |
 | `~`          | Swap case                                                        |
 | `g~`         | Swap case                                                        |
+| `g~g~`, `g~~` | Swap case of the current line                                   |
 | `gu`         | Make lowercase                                                   |
+| `gugu`, `guu` | Make the current line lowercase                                 |
 | `gU`         | Make uppercase                                                   |
-| `!`          | Filter through an external program                               |
+| `gUgU`, `gUU` | Make the current line uppercase                                 |
+| `g?`         | Encode with rot13                                                |
+| `g?g?`, `g??` | Encode the current line with rot13                              |
+| `<C-A>`      | Add to the number under the cursor                               |
+| `<C-X>`      | Subtract from the number under the cursor                        |
 | `=`          | Indent                                                           |
 | `==`         | Indent lines                                                     |
-| `g?`         | Encode with rot13                                                |
 | `>`          | Indent right                                                     |
 | `>>`         | Indent line right                                                |
+| `:>`         | Indent lines right                                               |
 | `<`          | Indent left                                                      |
 | `<<`         | Indent line left                                                 |
+| `:<`         | Indent lines left                                                |
 | `!`          | Filter text through a command                                    |
 | `!!`         | Filter lines through a command                                   |
 | `:`*range*`!`*command* | Filter *range* through *command*                       |
 | `:s`         | Substitute (see `:help :s`)                                      |
 | `:&`, `&`    | Repeat last substitution                                         |
+| `:retab`     | Like expand/unexpand depending on value of `expandtab` setting   |
+| `:sort`      | Sort lines (see `:help sorting`)                                 |
 
 
 
@@ -193,35 +221,103 @@
 
 
 
-|                                window commands                                 ||
-| ------------------- | --------------------------------------------------------- |
-| `<C-W>n`, `:new`    |                                                           |
-| `<C-W>s`, `:split`  |                                                           |
-| `<C-W>v`, `:vsplit` |                                                           |
-| `<C-W>o`, `:only`   |                                                           |
-| `<C-W>c`, `:close`  |                                                           |
-| `<C-W>q`, `:q[uit]` |                                                           |
-| `<C-W>=`            |                                                           |
-| `<C-W><C-W>`        |                                                           |
-| `<C-W>h`            |                                                           |
-| `<C-W>j`            |                                                           |
-| `<C-W>k`            |                                                           |
-| `<C-W>l`            |                                                           |
+|                              `:help windows.txt`                               ||
+| ------------------------ | ---------------------------------------------------- |
+| `<C-W>n`, `:new`         | Create a new window with an empty buffer             |
+| `<C-W>s`, `:split`       | Split the window horizontally                        |
+| `<C-W>v`, `:vsplit`      | Split the window vertically                          |
+| `<C-W>o`, `:only`        | Make the current window the only window              |
+| `<C-W>c`, `:close`       | Close current window                                 |
+| `<C-W>q`, `:q[uit]`      | Quit current window                                  |
+| `<C-W>h`, `<C-W><Left>`  | Move cursor to the window left of the current window |
+| `<C-W>j`, `<C-W><Down>`  | Move cursor to the window below the current window   |
+| `<C-W>k`, `<C-W><Up>`    | Move cursor to the window above the current window   |
+| `<C-W>l`, `<C-W><Right>` | Move cursor to the window right of the current window |
+| `<C-W>w`, `<C-W><C-W>`   | Move cursor to the window below/right                |
+| `<C-W>W`                 | Move cursor to the window above/left                 |
+| `<C-W>t`                 | Move cursor to the top left window                   |
+| `<C-W>b`                 | Move cursor to the bottom right window               |
+| `<C-W>p`                 | Move cursor to the previous window                   |
+| `<C-W>p`                 | Move cursor to the previous window                   |
+| `<C-W>r`, `<C-W><C-R>`   | Rotate windows down/right                            |
+| `<C-W>R`                 | Rotate windows up/left                               |
+| `<C-W>r`, `<C-W><C-R>`   | Rotate windows down/right                            |
+| `<C-W>x`, `<C-W><C-X>`   | Exchange windows                                     |
+| `<C-W>H`                 | Move the current window to the far left              |
+| `<C-W>J`                 | Move the current window to the bottom                |
+| `<C-W>K`                 | Move the current window to the top                   |
+| `<C-W>L`                 | Move the current window to the far right             |
+| `<C-W>=`                 | Make all windows equal size                          |
+| `<C-W>+`                 | Increase the height of the current window            |
+| `<C-W>-`                 | Decrease the height of the current window            |
+| `<C-W>>`                 | Increase the width of the current window             |
+| `<C-W><`                 | Decrease the width of the current window             |
+| `<C-W>`<code>&#124;</code> | Make window as wide as possible                    |
 
 
 
-|                                    display                                     ||
+|                              `:help editing.txt`                               ||
 | ------------ | ---------------------------------------------------------------- |
 | `<C-G>`      | Show filename and position in status line                        |
 | `g<C-G>`     | Show detailed position information in status line                |
-| `zz`         |                                                                  |
-| `zt`         |                                                                  |
-| `zb`         |                                                                  |
-| `zf`         |                                                                  |
-| `zF`         |                                                                  |
-| `:fold`      |                                                                  |
-| `zc`         |                                                                  |
-| `zo`         |                                                                  |
+| `:e[dit]`    | Re-open the current file                                         |
+| `:e` *file*  | Edit *file*                                                      |
+| `:enew`      | Edit a new empty buffer                                          |
+| `<C-^>`      | Edit the alternate file                                          |
+| `gf`         | Edit the file name at the cursor                                 |
+| `gF`         | Edit the file name and line number at the cursor                 |
+| `:args`      | Print the argument list                                          |
+| `:argadd` *file*  | Add *file* to the argument list                             |
+| `:argedit` *file* | Add *file* to the argument list and edit it                 |
+| `:argdelete` *pattern* | Delete files from matching *pattern* from the argument list |
+| `:n`         | Edit the next file in the argument list                          |
+| `:N`         | Edit the previous file in the argument list                      |
+| `:argdo` *command* | Execute *command* on each file in the argument list        |
+| `:w`         | Write the current buffer                                         |
+| `:w` *file*  | Write the current buffer to *file*                               |
+| `:wa`        | Write all buffers                                                |
+| `:wq`        | Write the current buffer and quit                                |
+| `:wqa`       | Write all buffers and quit                                       |
+| `:x`, `ZZ`   | Write the current buffer if it has changes and quit              |
+| `:xa`        | Write all changed buffers and quit                               |
+| `:q`         | Quit                                                             |
+| `:q!`, `ZQ`  | Force quit                                                       |
+| `:qa`        | Close all buffers and quit                                       |
+
+
+
+|                               `:help scroll.txt`                               ||
+| ------------ | ---------------------------------------------------------------- |
+| `<C-Y>`      | Scroll up a line at a time                                       |
+| `<C-E>`      | Scroll down a line at a time                                     |
+| `<C-U>`      | Scroll up a half screen at a time                                |
+| `<C-D>`      | Scroll down a half screen at a time                              |
+| `<C-B>`, `<S-Up>`, `<PageUp>` | Scroll window a page back (up)                  |
+| `<C-F>`, `<S-Down>`, `<PageDown>` | Scroll window a page forward                |
+| `z^`         | Scroll a visible page back                                       |
+| `z+`         | Scroll a visible page forward                                    |
+| `zt`         | Move the current line to the top (without moving cursor)         |
+| `z<CR>`      | Move the current line to the top (like `zt^`)                    |
+| `zb`         | Move the current line to the bottom                              |
+| `z-`         | Move the current line to the bottom (like `zb^`)                 |
+| `zz`         | Move the current line to the center                              |
+| `z.`         | Move the current line to the center (like `zz^`)                 |
+
+
+
+|                                `:help fold.txt`                                ||
+| ------------ | ---------------------------------------------------------------- |
+| `zf`         | Create a fold using a motion or visual selection                 |
+| `zF`         | Create a fold for a number of lines                              |
+| `:fold`      | Create a fold using a range or visual selection                  |
+| `zd`         | Delete the fold at the cursor                                    |
+| `zD`         | Delete all folds at the cursor                                   |
+| `zE`         | Eliminate all folds in the window                                |
+| `zo`         | Open the fold at the cursor                                      |
+| `zO`         | Open all folds at the cursor                                     |
+| `zc`         | Close the fold at the cursor                                     |
+| `zC`         | Close all folds at the cursor                                    |
+| `zR`         | Open all folds                                                   |
 
 
 
@@ -319,7 +415,7 @@
 | `:mark` *c*     | Set mark *c*                                                     |
 | `:k`*c*         | Set mark *c*                                                     |
 | `'`*c*          | Jump to mark *c* ([a-z] in current buffer, [A-Z] in any buffer)  |
-| <tt>\`</tt>*c*  | Jump to mark *c* ([a-z] in current buffer, [A-Z] in any buffer)  |
+| <code>\`</code>*c* | Jump to mark *c* ([a-z] in current buffer, [A-Z] in any buffer)  |
 | `:marks`        | List marks                                                       |
 | `:delmarks` *c* | Delete mark(s) *c*                                               |
 | `:delmarks!`    | Delete all marks                                                 |
@@ -366,47 +462,55 @@
 
 
 
-|                                buffer commands                                 ||
+|                              `:help buffer-list`                               ||
+|                                `:help :buffers`                                ||
 | ------------ | ---------------------------------------------------------------- |
-| `:ls`        |                                                                  |
-| `:bd`        |                                                                  |
-| `:enew`      |                                                                  |
-| `:bn`        |                                                                  |
-| `:bp`        |                                                                  |
-| `:bufdo`     |                                                                  |
+| `:ls`, `:buffers`, `:files` | List all buffers                                  |
+| `:badd` *file*              | Add *file* to the buffer list                     |
+| `:bdelete`                  | Delete a buffer from the buffer list              |
+| `:buffer` *n*               | Go to buffer *n*                                  |
+| `:bnext`                    | Go to the next buffer                             |
+| `:bprevious`                | Go to the previous buffer                         |
+| `:brewind`, `:bfirst`       | Go to the first buffer in the buffer list         |
+| `:blast`                    | Go to the last buffer in the buffer list          |
 
 
 
-|                                    exiting                                     ||
-| ------------ | ---------------------------------------------------------------- |
-| `:x`, `ZZ`   |                                                                  |
-| `:xa`        |                                                                  |
-| `:w`         |                                                                  |
-| `:wa`        |                                                                  |
-| `:wq`        |                                                                  |
-| `:wqa`       |                                                                  |
-| `:q`         |                                                                  |
-| `:q!`, `ZQ`  |                                                                  |
-| `:qa`        |                                                                  |
+|                              `:help list-repeat`                               ||
+| ------------------ | ---------------------------------------------------------- |
+| `:bufdo` *command* | Execute *command* on each buffer in the buffer list        |
+| `:windo` *command* | Execute *command* in each window                           |
 
 
 
-|                                     random                                     ||
+|                              `:help tabpage.txt`                               ||
+| ------------------ | ---------------------------------------------------------- |
+| `:tabnew`          | Open a new tab with an empty window                        |
+| `:tabnew` *file*   | Open a new tab and open *file*                             |
+| `:tab` *command*   | Open a new tab and execute *command*                       |
+| `:tabdo` *command* | Execute *command* in each tab                              |
+
+
+
+|                               `:help repeat.txt`                               ||
 | ----------------- | ----------------------------------------------------------- |
-| `:g`              |                                                             |
-| `:v`              |                                                             |
-| `:echo`           |                                                             |
-| `:windo`          |                                                             |
-| `:args`           |                                                             |
-| `:argdo`          |                                                             |
-| `:tabnew`         |                                                             |
-| `q:`, `:<C-F>`    |                                                             |
-| `q/`              |                                                             |
-| `q?`              |                                                             |
-| `:e`              |                                                             |
-| `:shell`          |                                                             |
-| `gf`              |                                                             |
-| `gF`              |                                                             |
+| `:g/`*pattern*`/`*command* | Execute *command* on lines matching *pattern*      |
+| `:v`, `:g!`       | Like `:g`, but work on lines that do not match *pattern*    |
+| `q`*n*            | Record a macro into register *n*                            |
+| `q`               | Stop recording a macro                                      |
+| `@`*n*            | Execute the macro in register *n*                           |
+| `@@`              | Execute the previous macro                                  |
+
+
+
+|                              `:help various.txt`                               ||
+| ----------------- | ----------------------------------------------------------- |
+| `:shell`          | Start a shell                                               |
+| `:!`*command*     | Execute external command *command*                          |
+| `:!!`             | Execute last `:!` command                                   |
+| `:version`        | Print the version of the editor and other information       |
+| `:normal` *string* | Execute *string* as if in normal mode                      |
+| `<C-L>`           | Redraw the screen                                           |
 
 
 
@@ -414,7 +518,7 @@
 | ------------ | ---------------------------------------------------------------- |
 | `.`          | Any character (other than a newline)                             |
 | `\.`         | Any character (across lines)                                     |
-| <tt>&#92;</tt><tt>&#124;</tt> | Or                                              |
+| <code>&#92;</code><code>&#124;</code> | Or                                      |
 | `\&`         | And (matches from the beginning of the line)                     |
 |                                    Grouping                                    ||
 | `\(`*pattern*`\)` | Grouping for capture or repetition                          |
@@ -453,7 +557,7 @@
 | `[[:print:]]` | Any printable character                                         |
 | `[[:graph:]]` | Any non-space printable character                               |
 |                                 Backreferences                                 ||
-| <tt>&#92;</tt>*n* | Previous grouped match *n*                                  |
+| <code>&#92;</code>*n* | Previous grouped match *n*                              |
 | `&`          | Entire left-hand side match                                      |
 |                             Zero-width assertions                              ||
 | `\@=`        | Zero-width positive look-ahead                                   |
@@ -483,3 +587,30 @@
 | `gvim`, `vim -g`    | Open GUI Vim                                              |
 | `vimdiff`, `vim -d` | Open Vim in diff mode                                     |
 | `vim -`             | Edit stdin                                                |
+
+
+
+|                                `:help cmdline`                                 ||
+| ----------------- | ----------------------------------------------------------- |
+| `q:`, `:<C-F>`    | Open the command line window                                |
+| `q/`              | Open the search window (searching forwards)                 |
+| `q?`              | Open the search window (searching backwards)                |
+
+
+
+|                                `:help undo.txt`                                ||
+| ------------ | ---------------------------------------------------------------- |
+| `u`          | Undo one change                                                  |
+| `:undo`      | Undo one change                                                  |
+| `<C-R>`      | Redo one change                                                  |
+| `:redo`      | Redo one change                                                  |
+| `U`          | Undo all changes on the line with the latest change              |
+| `:undolist`  | List the tree of changes                                         |
+| `g-`         | Go to an older state                                             |
+| `:earlier`   | Go to an older state (specified with a count or a time)          |
+| `g+`         | Go to a newer state                                              |
+| `:later`     | Go to a newer state (specified with a count or a time)           |
+| `:wundo` *file* | Write undo history to *file*                                  |
+| `:rundo` *file* | Read undo history from *file*                                 |
+
+
